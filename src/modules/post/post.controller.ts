@@ -20,7 +20,8 @@ const getAllPost: RequestHandler = async (req, res) => {
     res.send({
       success: true,
       message: "Post retrivie Successfully ",
-      data: result,
+      total:result.total,
+      data: result.data,
     });
   } catch (error) {
     res.send(error);
