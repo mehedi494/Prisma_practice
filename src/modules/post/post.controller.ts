@@ -59,10 +59,26 @@ const deletePost: RequestHandler = async (req, res) => {
     res.send(error);
   }
 };
+const learnAggregation: RequestHandler = async (req, res) => {
+ 
+
+
+  try {
+    const result = await PostService.learnAggregation();
+    res.send({
+      success: true,
+      message: "Aggregate Data",
+      data: result,
+    });
+  } catch (error) {
+    res.send(error);
+  }
+};
 
 export const PostController = {
   inserIntoDb,
   getAllPost,
   updatePost,
   deletePost,
+  learnAggregation
 };

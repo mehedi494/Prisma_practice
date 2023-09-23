@@ -1,4 +1,5 @@
 import { Post, PrismaClient } from "@prisma/client";
+import { resourceUsage } from "process";
 
 const prisma = new PrismaClient();
 
@@ -57,9 +58,35 @@ const deletePost = async (id: number): Promise<Post> => {
   return result;
 };
 
+/* Aggregation Groouping and Summirize */
+
+const learnAggregation = async () => {
+  // const result = await prisma.post.aggregate({
+  //   _avg: {
+  //     authorId: true,
+  //     categoryId: true,
+  //   },
+  //   _count: {
+  //     categoryId: true,
+  //   },
+  //   _sum: {
+  //     authorId: true,
+  //   },
+  // });
+  // return result;
+  const result = prisma.post.groupBy({
+    by:['title'],
+    _count:{
+      title:true 
+    }
+  })
+  return result
+};
+
 export const PostService = {
   inserIntoDb,
   getAllPost,
   updatePost,
   deletePost,
+  learnAggregation
 };
