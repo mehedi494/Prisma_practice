@@ -9,8 +9,8 @@ const inserIntoDb = async (data: Post): Promise<Post> => {
 const getAllPost = async (options: any) => {
   const { sortBy, sortOrder, searchTerm, page, limit } = options;
 
-  const skip = +limit * +page - limit;
-  const take = +limit;
+  const skip = +limit * +page - limit || 0;
+  const take = +limit || 10;
 
   console.log(skip, take);
 
